@@ -19,9 +19,3 @@ venv/
 # OS
 .DS_Store
 Thumbs.db
-Bajaj_Embeddings/
-Edelweiss_Embeddings/
-HDFC_Embeddings/
-KOTAK_Embeddings/
-LIC_Embeddings/
-StarHealth_Embeddings/
