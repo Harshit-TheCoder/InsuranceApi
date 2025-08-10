@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Virtual Environment
+venv/
+
+# Environment Variables
+.env
+
+# IDEs and editors
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+Bajaj_Embeddings/
+Edelweiss_Embeddings/
+HDFC_Embeddings/
+KOTAK_Embeddings/
+LIC_Embeddings/
+StarHealth_Embeddings/

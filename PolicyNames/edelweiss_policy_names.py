@@ -1,0 +1,20 @@
+edelweiss_policy = [
+    "EdelweissLife Active Pension Plus Policy",
+    "EdelweissLife Bharat Savings STAR Policy",
+    "EdelweissLife Guaranteed Future Savings Policy",
+    "EdelweissLife Group Life Protection Policy",
+    "EdelweissLife Group Total Secure Policy",
+    "EdelweissLife Guaranteed Income STAR Policy",
+    "EdelweissLife Guaranteed Savings STAR Policy",
+    "EdelweissLife Jan Suraksha Policy",
+    "EdelweissLife Legacy Plus Policy",
+    "EdelweissLife POS Saral Nivesh Policy",
+    "EdelweissLife Wealth Plus Policy",
+    "EdelweissLife Wealth Premier Policy",
+    "EdelweissLife Wealth Rise Policy",
+    "EdelweissLife Flexi Savings Plan Policy",
+    "EdelweissLife Premier Guaranteed STAR Policy",
+    "EdelweissLife Zindagi Protect Plus Policy",
+    "EdelweissLife Wealth Ultima Policy",
+    "GEB Brochure Policy"
+]
