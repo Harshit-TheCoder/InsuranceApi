@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 from typing import List, Optional
 import re
@@ -26,7 +27,12 @@ API_KEY = os.getenv("GEMINI_API_KEY")
 genai.configure(api_key=API_KEY)
 model = genai.GenerativeModel("gemini-2.5-flash")
 
-app = FastAPI()
+class PrettyJSONResponse(JSONResponse):
+    def render(self, content: any) -> bytes:
+        import json
+        return json.dumps(content, indent=4, ensure_ascii=False).encode("utf-8")
+
+app = FastAPI(default_response_class=PrettyJSONResponse)
 
 # Models for input/output
 class QueryRequest(BaseModel):
