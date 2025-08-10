@@ -3,6 +3,7 @@ from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 from typing import List, Optional
 import re
+import json
 from dotenv import load_dotenv
 import os
 import google.generativeai as genai
@@ -71,6 +72,17 @@ policy_strings = {
     "bajaj": "\n".join(f"- {p}" for p in bajaj_policy),
 }
 
+def clean_strings(obj):
+    if isinstance(obj, str):
+        # Replace escaped newlines and double-escaped newlines
+        return obj.replace("\\n", "\n").replace("\\\\n", "\n")
+    elif isinstance(obj, dict):
+        return {k: clean_strings(v) for k, v in obj.items()}
+    elif isinstance(obj, list):
+        return [clean_strings(i) for i in obj]
+    else:
+        return obj
+
 
 def normalize_question(raw_question: str) -> str:
     # Build the prompt for the generative model to normalize the question
@@ -112,6 +124,7 @@ def query_llm(company: str, question: str, session_id="default_session") -> str:
     )
     return response.get('answer', 'No answer returned.')
 
+
 @app.post("/chat/{company_name}", response_model=QueryResponse)
 async def chat_with_company(company_name: str, query: QueryRequest):
     company_name = company_name.lower()
@@ -128,5 +141,12 @@ async def chat_with_company(company_name: str, query: QueryRequest):
 
     normalized_question = normalize_question(question)
     answer = query_llm(company_name, normalized_question)
-
-    return QueryResponse(answer=answer)
+    try:
+        parsed_answer = json.loads(answer)
+        cleaned_answer = clean_strings(parsed_answer)
+        pretty_str = json.dumps(cleaned_answer, indent=4, ensure_ascii=False)
+        return QueryResponse(answer=pretty_str)
+    except Exception:
+        # Fallback: return raw string in JSON field
+        return QueryResponse(answer=answer)
+    
